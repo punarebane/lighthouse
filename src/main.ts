@@ -40,6 +40,8 @@ const urlSeed = params.has('seed') ? Number(params.get('seed')) >>> 0 : null;
 const autoplay = params.get('autoplay') === '1';
 const benchN = Number(params.get('bench') ?? 0) | 0;
 const lightingOn = params.get('light') !== '0';
+/** debug: fast-forward the run this many seconds with the bot (screenshots, boss testing) */
+const fastForward = Number(params.get('ff') ?? 0);
 const antialias = params.get('aa') === '1';
 
 class Game {
@@ -85,6 +87,15 @@ class Game {
     this.save.runs++;
     window.__LH.seed = seed;
     this.audio.play('wave', { minGap: 0 });
+    if (fastForward > 0) {
+      const w = this.world;
+      while (w.t < fastForward && w.state === RunState.Running) {
+        if (w.pendingLevels > 0) { rollOffers(w); applyOffer(w, botPick(w)); }
+        botInput(w, this.input);
+        step(w, this.input);
+        w.events.clear();
+      }
+    }
   }
 
   startBench(n: number): void {

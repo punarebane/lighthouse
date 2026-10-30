@@ -1,0 +1,43 @@
+window: 15s wall, 147 frames, 12.5s of sim (751 ticks)
+sampled allocations: 163.6 KB total, 1139 B/frame
+
+by file:
+     66.2 KB  deps/chunk-STQ4QEXX.js
+     39.4 KB  (native)
+      7.2 KB  deps/chunk-BOSKKNLI.js
+      5.5 KB  render/partPool.ts
+      5.1 KB  data/upgrades.ts
+      4.3 KB  sim/enemies.ts
+      4.0 KB  deps/pixi__js.js
+      3.6 KB  src/main.ts
+      3.5 KB  render/renderer.ts
+      3.3 KB  sim/embers.ts
+      3.2 KB  deps/chunk-H3Q2J6LD.js
+      3.1 KB  deps/chunk-RTD6FD22.js
+      3.0 KB  game/ui.ts
+      2.3 KB  render/fx.ts
+      2.3 KB  deps/chunk-QUCIGAWK.js
+
+top functions:
+     54.1 KB  _tick @ deps/chunk-STQ4QEXX.js:2681
+     31.0 KB  (IDLE_EXTERNAL) @ (native):0
+      8.1 KB  assignWithIgnore @ deps/chunk-STQ4QEXX.js:1602
+      5.5 KB  add @ render/partPool.ts:18
+      5.1 KB  apply @ data/upgrades.ts:104
+      4.1 KB  Buffer2 @ deps/chunk-BOSKKNLI.js:6648
+      3.5 KB  draw @ render/renderer.ts:279
+      3.2 KB  damageEnemy @ sim/enemies.ts:65
+      3.1 KB  create @ (native):0
+      2.6 KB  handleEvents @ src/main.ts:135
+      2.2 KB  beamPass @ sim/beam.ts:56
+      2.2 KB  step @ sim/sim.ts:48
+      2.1 KB  Float32Array @ (native):0
+      2.1 KB  spawnEmber @ sim/embers.ts:4
+      2.1 KB  createGLBuffer @ deps/chunk-H3Q2J6LD.js:414
+      2.0 KB  _updateSkew @ deps/chunk-STQ4QEXX.js:2216
+      2.0 KB  updateQuadBounds @ deps/chunk-STQ4QEXX.js:3300
+      2.0 KB  set alpha @ deps/pixi__js.js:21101
+      1.9 KB  (anon) @ game/ui.ts:409
+      1.3 KB  updateEmbers @ sim/embers.ts:24
+
+sim/core files: sim/sim.ts 2.2 KB, sim/director.ts 1.1 KB, sim/beam.ts 2.2 KB, sim/enemies.ts 4.3 KB, sim/embers.ts 3.3 KB, sim/world.ts 1.0 KB, core/pool.ts 1.1 KB

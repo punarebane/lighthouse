@@ -35,10 +35,14 @@ export class PartPool {
     p.rotation = rot;
     p.scaleX = sx;
     p.scaleY = sy;
-    // write the packed ABGR colour directly (the tint/alpha setters go through Color parsing)
+    // write the packed ABGR colour directly (the tint/alpha setters go through Color parsing),
+    // and only when it changed: packed colours with high alpha are outside V8's small-int
+    // range, so every write would box a new HeapNumber
     const a = alpha < 0 ? 0 : alpha > 1 ? 1 : alpha;
-    p.color = ((tint & 0xff) << 16) + (tint & 0xff00) + ((tint >> 16) & 0xff) + (((a * 255) | 0) << 24);
-    p.texture = tex ?? this.tex;
+    const c = ((tint & 0xff) << 16) + (tint & 0xff00) + ((tint >> 16) & 0xff) + (((a * 255) | 0) << 24);
+    if (p.color !== c) p.color = c;
+    const t = tex ?? this.tex;
+    if (p.texture !== t) p.texture = t;
     const ch = this.pc.particleChildren;
     if (ch[this.n] !== p) ch[this.n] = p;
     this.n++;

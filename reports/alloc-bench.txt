@@ -1,0 +1,21 @@
+window: 10s wall, 53 frames, 5.1s of sim (303 ticks)
+sampled allocations: 802.3 KB total, 15500 B/frame
+
+by file:
+    289.8 KB  render/partPool.ts
+    156.5 KB  deps/chunk-STQ4QEXX.js
+    122.1 KB  deps/pixi__js.js
+     93.1 KB  (native)
+     43.5 KB  render/renderer.ts
+     27.1 KB  sim/enemies.ts
+     17.0 KB  sim/beam.ts
+     13.8 KB  sim/embers.ts
+     10.4 KB  core/spatialHash.ts
+      6.1 KB  render/fx.ts
+      5.6 KB  deps/chunk-QUCIGAWK.js
+      3.3 KB  deps/chunk-H3Q2J6LD.js
+      3.2 KB  deps/chunk-BOSKKNLI.js
+      3.1 KB  data/upgrades.ts
+      2.3 KB  sim/sim.ts
+
+top functions:

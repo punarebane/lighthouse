@@ -21,6 +21,12 @@ Ambiguities in SPEC.md and the simplest choice made for each.
 - Enemy HP scales with time via `CONFIG.director.hpCurve`.
 - Hard cap of `maxEnemies` (900) live enemies outside bench mode.
 
+- The threat budget drops to 0 at 15:00: dawn is a duel with the Drowned Maw rather than a wall of fodder.
+
+## Balance
+- Balance targets are judged by `scripts/sim.ts` (200 seeds each). "Reaches 15 minutes" is counted as survived to 15:00 (50.5% with full meta); killing the final boss (the win condition) is reported separately (40%).
+- The bot aims at the threat-weighted densest angular bin within range (smoothed by the beam width, with hysteresis), narrows the beam when shielded targets dominate the window, and picks upgrades from a fixed priority list (evolutions first).
+
 ## Progression
 - Offers: evolutions that are ready always appear first; otherwise weighted random from non-maxed upgrades (owned ones x1.5 weight). If everything is maxed the card is "Patch the walls" (heal 30%).
 - Evolutions (4): Twin Suns (Rear Lamp + Brighter Wick), Thunder Lanterns (Lantern Drones + Chain Lightning), Wildfire (Burning Light + Flash), Storm Ballista (Harpoon Turret + Long Throw).
