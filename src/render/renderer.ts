@@ -77,6 +77,8 @@ export class GameRenderer {
   readonly rings = new Rings();
   readonly arcs = new Arcs();
   readonly shake = new Shake();
+  /** debug/marketing: hide damage numbers (?clean=1) */
+  showNumbers = true;
   private arcsDrawn = false;
   private hurtFlash = 0;
   private flashT = 0;
@@ -489,6 +491,7 @@ export class GameRenderer {
       }
     }
     this.digits.end();
+    this.digits.pc.visible = this.showNumbers;
 
     const R = this.rings;
     for (let k = 0; k < this.ringSprites.length; k++) {

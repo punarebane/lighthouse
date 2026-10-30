@@ -374,6 +374,7 @@ async function boot(): Promise<void> {
   });
   document.getElementById('game')!.appendChild(app.canvas);
   const renderer = new GameRenderer(app);
+  renderer.showNumbers = params.get('clean') !== '1';
   app.renderer.on('resize', () => renderer.resize());
   const inputs = new InputManager(app.canvas);
   const audio = new Audio();
