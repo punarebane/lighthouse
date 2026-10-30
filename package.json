@@ -1,0 +1,31 @@
+{
+  "name": "lighthouse",
+  "version": "1.0.0",
+  "description": "Lighthouse: aim the last light against the night sea. A Vite + TypeScript + PixiJS arcade survival game.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p . && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "vitest run",
+    "typecheck": "tsc -p .",
+    "e2e": "playwright test",
+    "sim": "tsx scripts/sim.ts",
+    "package": "tsx scripts/package.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21",
+    "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "pixi.js": "^8.22.0"
+  },
+  "type": "module",
+  "private": true
+}
