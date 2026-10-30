@@ -24,9 +24,12 @@ export class EnemyStore {
   readonly type: Uint8Array; readonly flags: Uint8Array;
   /** jelly generation, or boss variant */
   readonly gen: Uint8Array;
+  /** ship shield points (0 = broken); shieldMax for rendering */
+  readonly shield: Float32Array; readonly shieldMax: Float32Array;
 
   constructor(cap: number) {
     this.pool = new Pool(cap);
+    this.shield = new Float32Array(cap); this.shieldMax = new Float32Array(cap);
     const f = () => new Float32Array(cap);
     this.x = f(); this.y = f(); this.px = f(); this.py = f();
     this.vx = f(); this.vy = f(); this.hp = f(); this.maxHp = f();

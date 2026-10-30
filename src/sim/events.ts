@@ -24,6 +24,8 @@ export enum Ev {
   FirstSeen,
   /** an enemy projectile burned away by the beam */
   ProjectileBurned,
+  /** a ship's shield broke */
+  ShieldBreak,
 }
 
 /** Fixed-size SoA event ring the sim writes and render/audio drain each frame. */

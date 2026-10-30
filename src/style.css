@@ -102,6 +102,7 @@ input[type=range]:focus { outline: 2px solid var(--accent); }
 .focus-bar { position: relative; width: 160px; height: 6px; background: var(--border); border-radius: 3px; }
 .focus-knob { position: absolute; top: -5px; width: 6px; height: 16px; margin-left: -3px; background: var(--accent); border-radius: 2px; }
 .focus.narrow .focus-knob { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+.focus-keys { opacity: 0.6; margin-left: 6px; }
 .focus.teach { animation: teach 0.5s ease-in-out 8 alternate; color: var(--accent2); }
 @keyframes teach { from { transform: scale(1); } to { transform: scale(1.35); } }
 .kills { text-align: right; color: var(--dim); }

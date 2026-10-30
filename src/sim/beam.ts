@@ -86,12 +86,25 @@ export function beamPass(w: World, dt: number): void {
       const i = q[k]!;
       if (!E.pool.alive[i] || (E.flags[i]! & EF_BURROWED)) continue;
       markLit(w, i);
-      if (isShielded(w, i) && (sweep || !narrow)) {
-        // visible feedback that the shield is deflecting a too-wide beam
-        if ((w.tick + i) % 15 === 0) w.events.push(Ev.Hit, E.x[i]!, E.y[i]!, 0, 2);
+      const x = E.x[i]!, y = E.y[i]!;
+      if (E.shield[i]! > 0) {
+        // ship shields: every beam wears them down, a narrow main/rear beam five times faster
+        const d = Math.sqrt(x * x + y * y);
+        const t = d / range;
+        const f = 1 - B.falloff * (t > 1 ? 1 : t * t);
+        const k = sweep || !narrow ? B.wideShieldFactor : 1;
+        E.shield[i]! -= dps * f * k * dt;
+        if ((w.tick + i) % 15 === 0) w.events.push(Ev.Hit, x, y, 0, 2);
+        if (E.shield[i]! <= 0) {
+          E.shield[i] = 0;
+          w.events.push(Ev.ShieldBreak, x, y, E.radius[i]!);
+        }
         continue;
       }
-      const x = E.x[i]!, y = E.y[i]!;
+      if (isShielded(w, i) && (sweep || !narrow)) {
+        if ((w.tick + i) % 15 === 0) w.events.push(Ev.Hit, x, y, 0, 2);
+        continue;
+      }
       const d = Math.sqrt(x * x + y * y);
       const t = d / range;
       let f = 1 - B.falloff * (t > 1 ? 1 : t * t);

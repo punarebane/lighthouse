@@ -8,7 +8,7 @@ const ENEMY_TIPS: Record<number, string> = {
   [EnemyType.Crab]: 'Crabs are tough. Narrow the beam to burn them down.',
   [EnemyType.Jelly]: 'Jellies split in two when they pop.',
   [EnemyType.Spitter]: 'Spitters shoot from the dark. Your beam burns their spit out of the air.',
-  [EnemyType.Ship]: 'Shielded ships! Only a NARROW beam hurts them: scroll up, W, or RT.',
+  [EnemyType.Ship]: 'Shielded ships! Narrow the beam (wheel up, W or RT) to break the shield fast.',
   [EnemyType.Burrower]: 'Burrowers tunnel unseen until they surface near the rock.',
 };
 import { META, META_FULL } from './data/meta';
@@ -229,6 +229,7 @@ class Game {
           }
           break;
         }
+        case Ev.ShieldBreak: this.audio.play('split', { pitch: 0.7, minGap: 0.05 }); break;
         case Ev.ProjectileBurned: this.audio.play('zap', { pitch: 1.6, minGap: 0.06 }); break;
         case Ev.Wave: this.audio.play('wave'); this.ui.banner(a === 0 ? 'They surround the rock' : 'A tide of them', 2.2); break;
       }

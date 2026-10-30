@@ -284,6 +284,11 @@ export class GameRenderer {
         this.rings.spawn(x, y, 60, 140, 0.5, p.eyes);
         this.shake.add(0.15);
         break;
+      case Ev.ShieldBreak:
+        this.sparks.burst(x, y, 18, 160, 0.5, 8, p.shield);
+        this.rings.spawn(x, y, a, a * 3, 0.35, p.shield);
+        this.addLight(x, y, 60, 0.2, p.shield);
+        break;
       case Ev.ProjectileBurned:
         this.sparks.burst(x, y, 6, 90, 0.3, 6, p.spit);
         this.addLight(x, y, 30, 0.15, p.beam);
@@ -371,9 +376,10 @@ export class GameRenderer {
       if (type === EnemyType.Jelly) sx *= 1 + Math.sin(this.time * 6 + E.phase[i]!) * 0.12;
       if (type === EnemyType.Eel) sy *= 1 + Math.sin(this.time * 12 + E.phase[i]!) * 0.15;
       this.enemyPools[type]!.add(x, y, rot, sx, sy, tint, fade);
-      if (type === EnemyType.Ship) {
-        const narrow = w.focus >= C.beam.shieldFocus;
-        this.shields.add(x, y, this.time * 0.7 + i, (r * 1.45) / 30, (r * 1.45) / 30, p.shield, narrow ? 0.35 : 0.85);
+      if (type === EnemyType.Ship && E.shield[i]! > 0) {
+        const frac = E.shield[i]! / (E.shieldMax[i]! || 1);
+        const s = (r * (1.2 + 0.25 * frac)) / 30;
+        this.shields.add(x, y, this.time * 0.7 + i, s, s, p.shield, 0.35 + 0.6 * frac);
       }
       if (!(f & EF_LIT)) {
         const hx = x + Math.cos(rot) * r * 0.45, hy = y + Math.sin(rot) * r * 0.45;

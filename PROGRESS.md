@@ -15,10 +15,10 @@ All four milestones (M1–M4) are implemented and their acceptance checks pass, 
 
 | | median survival | p10 / p25 / p75 / p90 | reached 15:00 | killed final boss |
 |---|---|---|---|---|
-| bot, no meta (target median 6–9 min) | **8:48** | 5:34 / 5:36 / 10:40 / 12:29 | 0.5% | 0.5% |
-| bot, full meta (target 30–60% reach 15:00) | 15:00 | 12:58 / 13:46 / 15:00 / 15:00 | **52.5%** | 44.5% |
+| bot, no meta (target median 6–9 min) | **8:56** | 7:15 / 7:50 / 10:34 / 11:25 | 0% | 0% |
+| bot, full meta (target 30–60% reach 15:00) | 14:12 | 12:38 / 13:14 / 15:00 / 15:00 | **46.5%** | 45.0% |
 
-  (Re-run after playtest fixes on 2026-10-30.) No-meta deaths cluster at the Leviathan (5:00) and the Kraken (10:00). Most picked: Brighter Wick, Harpoon Turret, Long Throw, Rear Lamp, Wide Lens. Least picked: Whale Oil, Ember Magnet, Cold Light, Hearth Glow (the bot's fixed priority list puts these last), and the Thunder Lanterns / Wildfire evolutions (rarely completed). Damage taken comes almost entirely from shielded ships and bosses; the bot's aim makes fodder harmless, so humans will find minutes 0–5 harder than the bot does.
+  (Re-run after playtest 2 on 2026-10-30.) Bosses are no longer walls; deaths now spread over 7–12 minutes, mostly to ships late in the run. Most picked: Brighter Wick, Harpoon Turret, Long Throw, Rear Lamp, Wide Lens. Least picked: Whale Oil, Ember Magnet, Cold Light, Hearth Glow (the bot's fixed priority list puts these last), and the Thunder Lanterns / Wildfire evolutions (rarely completed). Damage taken comes almost entirely from shielded ships and bosses; the bot's aim makes fodder harmless, so humans will find minutes 0–5 harder than the bot does.
 
 ## Performance
 `?bench=5000` in headless Chromium 1243 (SwiftShader software GL, 4-core container), 10s after 1.5s warm-up:
@@ -51,6 +51,12 @@ Optimisations made: separation scans capped at 24 neighbour candidates (sim tick
 
 ## Playtest 1 (Sander, died before 5:00 to "unstoppable things")
 - The beam now burns enemy projectiles (`projectileBurnTime`), the narrow-beam threshold for shields dropped 0.72 → 0.65, deflected beams throw blue sparks, and each enemy type shows a one-line tip the first time it appears (the ship tip also pulses the focus meter). Late-game threat/HP raised to keep the bot targets.
+
+## Playtest 2 (ships still unclear, Leviathan too strong)
+- Ships now carry a breakable shield (`beam.shipShield`, scaled by the HP curve): every beam wears it down, a too-wide or sweeping beam at 20% rate, a narrow beam at full rate. When it breaks the ship is a normal enemy. The ring shrinks and fades as the shield drops.
+- Focus key hints under the focus meter.
+- Leviathan: HP 2600 → 1800, contact 14 → 8 dps, charges every 9s at 65 speed.
+- To keep bot targets: enemy HP curve steeper after 5:00, threat up after 7:00, meta regen 0.2 → 0.1/rank and armour 4% → 3%/rank.
 
 ## Next up
 - Measure `?bench=5000` on a real mid-range laptop with a GPU and record it here.

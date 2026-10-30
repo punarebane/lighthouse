@@ -55,7 +55,7 @@ export interface BossDef {
 }
 
 export const BOSSES: BossDef[] = [
-  { name: 'The Leviathan', at: 300, hp: 2600, speed: 16, radius: 52, contactDps: 14, xp: 80, coins: 40 },
+  { name: 'The Leviathan', at: 300, hp: 1800, speed: 15, radius: 52, contactDps: 8, xp: 80, coins: 40 },
   { name: 'The Kraken', at: 600, hp: 11000, speed: 18, radius: 60, contactDps: 35, xp: 160, coins: 80 },
   { name: 'The Drowned Maw', at: 900, hp: 20000, speed: 14, radius: 70, contactDps: 40, xp: 0, coins: 150 },
 ];
@@ -110,6 +110,10 @@ export const CONFIG = {
     falloff: 0.55,
     /** shielded ships take beam damage only when focus >= this */
     shieldFocus: 0.65,
+    /** ship shield points (scaled by the time HP curve); any beam wears it down, a narrow one fast */
+    shipShield: 70,
+    /** fraction of beam damage a too-wide (or the sweeping) beam does to shields */
+    wideShieldFactor: 0.2,
     /** seconds an enemy projectile survives inside the main/rear beam */
     projectileBurnTime: 0.12,
     /** fraction of the main beam's dps the second beam has per level */
@@ -136,14 +140,14 @@ export const CONFIG = {
   director: {
     /** [seconds, threat points per second]; drops to 0 at 15:00 so dawn is a duel with the Maw */
     threatCurve: [
-      [0, 1.6], [60, 3.4], [180, 7.5], [300, 11], [420, 17.5], [600, 27], [780, 46], [899, 58], [900, 0],
+      [0, 1.6], [60, 3.4], [180, 7.5], [300, 11], [420, 20], [600, 34], [780, 70], [899, 100], [900, 0],
     ] as Array<[number, number]>,
     /** budget multiplier while a boss is alive */
     bossBudgetScale: 0.45,
     /** budget the director starts with, so the first group shows up immediately */
     startBudget: 6,
     /** hp multiplier ramps over time: [seconds, mult] */
-    hpCurve: [[0, 1], [300, 1.6], [600, 3.1], [780, 4.4], [900, 5.8]] as Array<[number, number]>,
+    hpCurve: [[0, 1], [300, 1.8], [480, 3.15], [600, 3.9], [780, 6.3], [900, 9.4]] as Array<[number, number]>,
     maxEnemies: 900,
     events: [
       { at: 125, kind: 'ring', type: EnemyType.Swarmer, count: 36 },
@@ -177,8 +181,8 @@ export const CONFIG = {
     spawnFade: 0.6,
   },
   boss: {
-    leviathanChargeCd: 7,
-    leviathanChargeSpeed: 80,
+    leviathanChargeCd: 9,
+    leviathanChargeSpeed: 65,
     leviathanChargeTime: 1.2,
     krakenOrbitRadius: 400,
     krakenSummonCd: 5,

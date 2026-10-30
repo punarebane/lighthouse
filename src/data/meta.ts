@@ -23,13 +23,13 @@ export const META: MetaDef[] = [
   { id: 'm_rot', name: 'Greased Bearings', maxRank: 5, cost: cost(20),
     desc: (r) => `+${r * 8}% beam turn speed`, apply: (s, r) => { s.rotSpeed *= 1 + r * 0.08; } },
   { id: 'm_regen', name: 'Herbal Tea', maxRank: 5, cost: cost(35),
-    desc: (r) => `+${(r * 0.2).toFixed(1)} HP/s regeneration`, apply: (s, r) => { s.regen += r * 0.2; } },
+    desc: (r) => `+${(r * 0.1).toFixed(1)} HP/s regeneration`, apply: (s, r) => { s.regen += r * 0.1; } },
   { id: 'm_coin', name: 'Salvage Rights', maxRank: 5, cost: cost(25),
     desc: (r) => `+${r * 10}% coins per run`, apply: (s, r) => { s.coinMult += r * 0.1; } },
   { id: 'm_range', name: 'Taller Tower', maxRank: 5, cost: cost(30),
     desc: (r) => `+${r * 5}% beam range`, apply: (s, r) => { s.beamRangeMult += r * 0.05; } },
   { id: 'm_armour', name: 'Mortar & Pitch', maxRank: 5, cost: cost(40),
-    desc: (r) => `${r * 4}% less damage taken`, apply: (s, r) => { s.armour = 1 - (1 - s.armour) * (1 - r * 0.04); } },
+    desc: (r) => `${r * 3}% less damage taken`, apply: (s, r) => { s.armour = 1 - (1 - s.armour) * (1 - r * 0.03); } },
 ];
 
 export const META_FULL: number[] = META.map((m) => m.maxRank);

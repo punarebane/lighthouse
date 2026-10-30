@@ -31,6 +31,7 @@ export function spawnEnemy(w: World, type: EnemyType, x: number, y: number, gen:
   E.type[i] = type;
   E.gen[i] = gen;
   E.flags[i] = type === EnemyType.Burrower ? EF_BURROWED : 0;
+  E.shield[i] = E.shieldMax[i] = type === EnemyType.Ship ? CONFIG.beam.shipShield * hpScale : 0;
   if (!(w.seenTypes & (1 << type))) {
     w.seenTypes |= 1 << type;
     w.events.push(Ev.FirstSeen, x, y, type);
@@ -55,7 +56,7 @@ export function spawnBoss(w: World, variant: number, x: number, y: number): numb
 }
 
 export function isShielded(w: World, i: number): boolean {
-  return w.enemies.type[i] === EnemyType.Ship || (w.enemies.flags[i]! & EF_SHIELDED) !== 0;
+  return w.enemies.shield[i]! > 0 || (w.enemies.flags[i]! & EF_SHIELDED) !== 0;
 }
 
 /**

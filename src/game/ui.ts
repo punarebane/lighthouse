@@ -335,7 +335,7 @@ export class UI {
       e('boss', e('boss-name'), e('boss-bar', e('boss-fill'))),
       e('hud-bottom',
         e('build'),
-        e('focus', h('span', {}, 'wide'), e('focus-bar', e('focus-knob')), h('span', {}, 'narrow')),
+        e('focus', h('span', {}, 'wide'), e('focus-bar', e('focus-knob')), h('span', {}, 'narrow'), h('span', { class: 'focus-keys' }, 'wheel · W/S · LT/RT')),
         e('kills'),
       ),
       e('banner'),
