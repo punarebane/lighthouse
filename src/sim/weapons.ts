@@ -17,6 +17,7 @@ export function spawnProjectile(
   P.damage[i] = damage; P.radius[i] = radius; P.pierce[i] = pierce;
   P.life[i] = life; P.kind[i] = kind; P.hostile[i] = hostile ? 1 : 0;
   P.lastHit[i] = -1;
+  P.heat[i] = 0;
   return i;
 }
 

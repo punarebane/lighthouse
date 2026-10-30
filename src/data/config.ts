@@ -109,7 +109,9 @@ export const CONFIG = {
     range: 380,
     falloff: 0.55,
     /** shielded ships take beam damage only when focus >= this */
-    shieldFocus: 0.72,
+    shieldFocus: 0.65,
+    /** seconds an enemy projectile survives inside the main/rear beam */
+    projectileBurnTime: 0.12,
     /** fraction of the main beam's dps the second beam has per level */
     lowHpFlicker: 0.3,
   },
@@ -134,14 +136,14 @@ export const CONFIG = {
   director: {
     /** [seconds, threat points per second]; drops to 0 at 15:00 so dawn is a duel with the Maw */
     threatCurve: [
-      [0, 1.6], [60, 3.4], [180, 7.5], [300, 11], [420, 16], [600, 23], [780, 35], [899, 44], [900, 0],
+      [0, 1.6], [60, 3.4], [180, 7.5], [300, 11], [420, 17.5], [600, 27], [780, 46], [899, 58], [900, 0],
     ] as Array<[number, number]>,
     /** budget multiplier while a boss is alive */
     bossBudgetScale: 0.45,
     /** budget the director starts with, so the first group shows up immediately */
     startBudget: 6,
     /** hp multiplier ramps over time: [seconds, mult] */
-    hpCurve: [[0, 1], [300, 1.6], [600, 2.7], [780, 3.7], [900, 4.8]] as Array<[number, number]>,
+    hpCurve: [[0, 1], [300, 1.6], [600, 3.1], [780, 4.4], [900, 5.8]] as Array<[number, number]>,
     maxEnemies: 900,
     events: [
       { at: 125, kind: 'ring', type: EnemyType.Swarmer, count: 36 },

@@ -5,8 +5,9 @@ Ambiguities in SPEC.md and the simplest choice made for each.
 ## Controls and beam
 - **Rotation speed applies to every aim device.** Mouse and right stick set a *target* angle; the beam turns toward it at `rotSpeed` (rad/s). A/D and the left stick turn at that rate directly. This makes the rotation-speed upgrade matter for mouse players too.
 - **Focus** is a single 0..1 value (0 = wide, 1 = narrow). Half-width and a DPS multiplier are both lerped from it (`CONFIG.beam`). Wheel steps 0.1 per notch; W/S and the triggers change it continuously.
-- **"Narrow beam" for shielded ships** means focus >= `CONFIG.beam.shieldFocus` (0.72), not an absolute angle, so the Wide Lens upgrade doesn't lock players out of hurting ships. The HUD focus knob turns blue and ship shields fade when the beam is narrow enough.
+- **"Narrow beam" for shielded ships** means focus >= `CONFIG.beam.shieldFocus` (0.65), not an absolute angle, so the Wide Lens upgrade doesn't lock players out of hurting ships. The HUD focus knob turns blue and ship shields fade when the beam is narrow enough.
 - Shields block **all** non-beam damage (harpoons bounce, chain lightning skips them, burn is not applied). The rear beam counts as narrow if the main beam is (it shares the focus); the sweeping third beam has a fixed medium focus and never pierces shields.
+- The main and rear beams burn enemy projectiles after 0.12s of exposure (playtest: spit felt unstoppable). The sweeping beam doesn't.
 - **Damage falloff**: `1 - falloff * (d/range)^2`, so the beam still does 45% at the tip.
 
 ## Enemies

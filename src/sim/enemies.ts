@@ -31,6 +31,10 @@ export function spawnEnemy(w: World, type: EnemyType, x: number, y: number, gen:
   E.type[i] = type;
   E.gen[i] = gen;
   E.flags[i] = type === EnemyType.Burrower ? EF_BURROWED : 0;
+  if (!(w.seenTypes & (1 << type))) {
+    w.seenTypes |= 1 << type;
+    w.events.push(Ev.FirstSeen, x, y, type);
+  }
   return i;
 }
 

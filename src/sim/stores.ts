@@ -53,8 +53,11 @@ export class ProjectileStore {
   readonly lastHit: Int32Array;
   readonly kind: Uint8Array;
   readonly hostile: Uint8Array;
+  /** seconds spent inside the beam (enemy projectiles burn away) */
+  readonly heat: Float32Array;
   constructor(cap: number) {
     this.pool = new Pool(cap);
+    this.heat = new Float32Array(cap);
     const f = () => new Float32Array(cap);
     this.x = f(); this.y = f(); this.px = f(); this.py = f(); this.vx = f(); this.vy = f();
     this.life = f(); this.damage = f(); this.radius = f();

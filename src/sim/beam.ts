@@ -2,6 +2,7 @@ import { CONFIG } from '../data/config';
 import { lerp, wrapAngle, TAU } from '../core/math';
 import { EF_BURROWED, EF_LIT } from './stores';
 import { DmgSrc, type World } from './world';
+import { Ev } from './events';
 import { damageEnemy, isShielded } from './enemies';
 
 /** Beam table stride: angle, halfWidth, range, dps fraction, source. */
@@ -85,7 +86,11 @@ export function beamPass(w: World, dt: number): void {
       const i = q[k]!;
       if (!E.pool.alive[i] || (E.flags[i]! & EF_BURROWED)) continue;
       markLit(w, i);
-      if (isShielded(w, i) && (sweep || !narrow)) continue;
+      if (isShielded(w, i) && (sweep || !narrow)) {
+        // visible feedback that the shield is deflecting a too-wide beam
+        if ((w.tick + i) % 15 === 0) w.events.push(Ev.Hit, E.x[i]!, E.y[i]!, 0, 2);
+        continue;
+      }
       const x = E.x[i]!, y = E.y[i]!;
       const d = Math.sqrt(x * x + y * y);
       const t = d / range;
@@ -95,6 +100,28 @@ export function beamPass(w: World, dt: number): void {
         f *= 1 + s.lensBonus * (off < 1 ? 1 - off : 0);
       }
       damageEnemy(w, i, dps * f * dt, src);
+    }
+  }
+
+  // the main and rear beams burn enemy projectiles out of the air
+  const P = w.projectiles;
+  const burn = B.projectileBurnTime;
+  for (let i = 0; i < P.pool.hi; i++) {
+    if (!P.pool.alive[i] || !P.hostile[i]) continue;
+    const x = P.x[i]!, y = P.y[i]!;
+    const d = Math.sqrt(x * x + y * y);
+    const ang = Math.atan2(y, x);
+    let inBeam = false;
+    for (let bi = 0; bi < n && !inBeam; bi++) {
+      const o = bi * BEAM_STRIDE;
+      if (w.beams[o + 4] === DmgSrc.SweepBeam) continue;
+      inBeam = d <= w.beams[o + 2]! && Math.abs(wrapAngle(ang - w.beams[o]!)) <= w.beams[o + 1]!;
+    }
+    if (!inBeam) continue;
+    P.heat[i]! += dt;
+    if (P.heat[i]! >= burn) {
+      w.events.push(Ev.ProjectileBurned, x, y);
+      P.pool.free(i);
     }
   }
 

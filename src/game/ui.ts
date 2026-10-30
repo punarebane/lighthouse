@@ -356,10 +356,20 @@ export class UI {
   banner(text: string, seconds = 2.5): void {
     const b = this.hudEls['banner']!;
     b.textContent = text;
+    b.style.animationDuration = `${seconds}s`;
+    b.classList.toggle('long', text.length > 40);
     b.classList.remove('show');
     void b.offsetWidth;
     b.classList.add('show');
     window.setTimeout(() => b.classList.remove('show'), seconds * 1000);
+  }
+
+  /** pulse the focus meter to teach the narrow-beam mechanic */
+  flashFocus(): void {
+    const f = this.hudEls['focus']!;
+    f.classList.remove('teach');
+    void f.offsetWidth;
+    f.classList.add('teach');
   }
 
   benchText(text: string): void {

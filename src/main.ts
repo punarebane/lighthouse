@@ -1,6 +1,16 @@
 import './style.css';
 import { Application } from 'pixi.js';
-import { CONFIG, BOSSES } from './data/config';
+import { CONFIG, BOSSES, EnemyType } from './data/config';
+
+/** Shown once per run, the first time each enemy type appears. */
+const ENEMY_TIPS: Record<number, string> = {
+  [EnemyType.Eel]: 'Eels weave fast. Sweep across them.',
+  [EnemyType.Crab]: 'Crabs are tough. Narrow the beam to burn them down.',
+  [EnemyType.Jelly]: 'Jellies split in two when they pop.',
+  [EnemyType.Spitter]: 'Spitters shoot from the dark. Your beam burns their spit out of the air.',
+  [EnemyType.Ship]: 'Shielded ships! Only a NARROW beam hurts them: scroll up, W, or RT.',
+  [EnemyType.Burrower]: 'Burrowers tunnel unseen until they surface near the rock.',
+};
 import { META, META_FULL } from './data/meta';
 import { palette, setColorblind } from './data/palette';
 import { createWorld, step } from './sim/sim';
@@ -211,6 +221,15 @@ class Game {
         case Ev.BossKill: this.audio.play('bossdie', { minGap: 0 }); this.ui.banner(`${BOSSES[a | 0]!.name} falls`, 3); break;
         case Ev.Death: this.audio.play('death', { minGap: 0 }); break;
         case Ev.Victory: this.audio.play('victory', { minGap: 0 }); break;
+        case Ev.FirstSeen: {
+          const tip = ENEMY_TIPS[a | 0];
+          if (tip) {
+            this.ui.banner(tip, 5);
+            if ((a | 0) === EnemyType.Ship) this.ui.flashFocus();
+          }
+          break;
+        }
+        case Ev.ProjectileBurned: this.audio.play('zap', { pitch: 1.6, minGap: 0.06 }); break;
         case Ev.Wave: this.audio.play('wave'); this.ui.banner(a === 0 ? 'They surround the rock' : 'A tide of them', 2.2); break;
       }
     }

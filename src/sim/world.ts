@@ -110,6 +110,8 @@ export class World {
   bossesKilled = 0;
   peakEnemies = 0;
   slowmo = 0;
+  /** bitmask of enemy types spawned so far this run */
+  seenTypes = 0;
   /** if set, the director appends [tick, type, x, y] for every spawn roll (tests) */
   spawnLog: number[] | null = null;
 

@@ -1,36 +1,37 @@
 
 === Bot WITHOUT meta upgrades: 200 runs ===
-survival median 8:57  p10 5:34  p25 5:36  p75 10:16  p90 10:27
-won (killed the 15:00 boss): 0 (0.0%)   reached 15:00: 0 (0.0%)
+survival median 8:48  p10 5:34  p25 5:36  p75 10:40  p90 12:29
+won (killed the 15:00 boss): 1 (0.5%)   reached 15:00: 1 (0.5%)
 deaths by minute:
-   5m  ################### 61
-   6m  #### 13
-   7m  ##### 15
-   8m  #### 13
-   9m  #### 12
-  10m  ######################### 81
-  11m  # 1
-  13m  # 2
+   5m  ################### 63
+   6m  ## 5
+   7m  ##### 14
+   8m  ####### 22
+   9m  ######## 25
+  10m  ######## 26
+  11m  ##### 14
+  12m  ###### 18
+  13m  ### 10
   14m  # 2
-mean level 30.0, mean bosses killed 0.77
-most picked: Brighter Wick 947, Harpoon Turret 788, Long Throw 769, Rear Lamp 768, Wide Lens 637
-least picked: Whale Oil 2, Ember Magnet 0, Cold Light 0, Thunder Lanterns (evo) 0, Wildfire (evo) 0
-damage taken from: Boss 45, Projectiles 35, Ship 33, Burrower 0, Jelly 0, Eel 0, Crab 0, Swarmer 0 (per run)
+  won  # 1
+mean level 31.9, mean bosses killed 0.94
+most picked: Brighter Wick 946, Rear Lamp 830, Harpoon Turret 796, Long Throw 773, Wide Lens 674
+least picked: Whale Oil 2, Thunder Lanterns (evo) 1, Ember Magnet 0, Cold Light 0, Wildfire (evo) 0
+damage taken from: Ship 64, Boss 48, Projectiles 8, Jelly 0, Eel 0, Burrower 0, Swarmer 0, Crab 0 (per run)
 
 === Bot WITH full meta upgrades: 200 runs ===
-survival median 15:00  p10 11:06  p25 12:52  p75 15:00  p90 15:04
-won (killed the 15:00 boss): 80 (40.0%)   reached 15:00: 101 (50.5%)
+survival median 15:00  p10 12:58  p25 13:46  p75 15:00  p90 15:00
+won (killed the 15:00 boss): 89 (44.5%)   reached 15:00: 105 (52.5%)
 deaths by minute:
-  10m  ###### 18
-  11m  ###### 18
-  12m  ###### 20
-  13m  ######## 25
-  14m  ###### 18
-  15m  ####### 21
-  won  ######################## 80
-mean level 53.1, mean bosses killed 2.31
-most picked: Brighter Wick 1000, Rear Lamp 995, Wide Lens 992, Harpoon Turret 979, Long Throw 974
-least picked: Hearth Glow 20, Wildfire (evo) 11, Whale Oil 8, Ember Magnet 0, Cold Light 0
-damage taken from: Ship 356, Projectiles 118, Boss 7, Burrower 0, Eel 0, Jelly 0 (per run)
+  11m  ## 6
+  12m  ##### 16
+  13m  ############ 38
+  14m  ########### 35
+  15m  ##### 16
+  won  ########################### 89
+mean level 58.6, mean bosses killed 2.44
+most picked: Brighter Wick 1000, Rear Lamp 999, Harpoon Turret 998, Wide Lens 997, Long Throw 997
+least picked: Wildfire (evo) 47, Hearth Glow 26, Whale Oil 8, Ember Magnet 0, Cold Light 0
+damage taken from: Ship 460, Projectiles 10, Boss 8, Burrower 0, Eel 0, Jelly 0 (per run)
 
-(221.4s on 4 threads)
+(224.5s on 4 threads)

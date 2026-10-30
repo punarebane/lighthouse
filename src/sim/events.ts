@@ -20,6 +20,10 @@ export enum Ev {
   Death,
   Wave,
   BossAttack,
+  /** first time an enemy type appears this run (a = type) */
+  FirstSeen,
+  /** an enemy projectile burned away by the beam */
+  ProjectileBurned,
 }
 
 /** Fixed-size SoA event ring the sim writes and render/audio drain each frame. */

@@ -284,6 +284,10 @@ export class GameRenderer {
         this.rings.spawn(x, y, 60, 140, 0.5, p.eyes);
         this.shake.add(0.15);
         break;
+      case Ev.ProjectileBurned:
+        this.sparks.burst(x, y, 6, 90, 0.3, 6, p.spit);
+        this.addLight(x, y, 30, 0.15, p.beam);
+        break;
       case Ev.Explosion:
         this.sparks.burst(x, y, 10, 160, 0.35, 8, p.burn);
         this.addLight(x, y, a * 1.6, 0.2, p.burn);

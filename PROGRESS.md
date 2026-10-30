@@ -15,10 +15,10 @@ All four milestones (M1–M4) are implemented and their acceptance checks pass, 
 
 | | median survival | p10 / p25 / p75 / p90 | reached 15:00 | killed final boss |
 |---|---|---|---|---|
-| bot, no meta (target median 6–9 min) | **8:57** | 5:34 / 5:36 / 10:16 / 10:27 | 0% | 0% |
-| bot, full meta (target 30–60% reach 15:00) | 15:00 | 11:06 / 12:52 / 15:00 / 15:04 | **50.5%** | 40.0% |
+| bot, no meta (target median 6–9 min) | **8:48** | 5:34 / 5:36 / 10:40 / 12:29 | 0.5% | 0.5% |
+| bot, full meta (target 30–60% reach 15:00) | 15:00 | 12:58 / 13:46 / 15:00 / 15:00 | **52.5%** | 44.5% |
 
-  No-meta deaths are bimodal: 30% at the Leviathan (5:00) and 40% at the Kraken (10:00), the rest in between. Most picked: Brighter Wick, Harpoon Turret, Long Throw, Rear Lamp, Wide Lens. Least picked: Whale Oil, Ember Magnet, Cold Light, Hearth Glow (the bot's fixed priority list puts these last), and the Thunder Lanterns / Wildfire evolutions (rarely completed). Damage taken comes almost entirely from bosses, spitter/boss projectiles and shielded ships; the bot's aim makes fodder harmless, so humans will find minutes 0–5 harder than the bot does.
+  (Re-run after playtest fixes on 2026-10-30.) No-meta deaths cluster at the Leviathan (5:00) and the Kraken (10:00). Most picked: Brighter Wick, Harpoon Turret, Long Throw, Rear Lamp, Wide Lens. Least picked: Whale Oil, Ember Magnet, Cold Light, Hearth Glow (the bot's fixed priority list puts these last), and the Thunder Lanterns / Wildfire evolutions (rarely completed). Damage taken comes almost entirely from shielded ships and bosses; the bot's aim makes fodder harmless, so humans will find minutes 0–5 harder than the bot does.
 
 ## Performance
 `?bench=5000` in headless Chromium 1243 (SwiftShader software GL, 4-core container), 10s after 1.5s warm-up:
@@ -48,6 +48,9 @@ Optimisations made: separation scans capped at 24 neighbour candidates (sim tick
 - Damage numbers overlap in dense fights (by design they are pooled to 256).
 - On narrow portrait windows the menu title can overflow (mobile is out of scope).
 - The bot ignores Ember Magnet / Cold Light / Hearth Glow, so their balance is untested by the harness.
+
+## Playtest 1 (Sander, died before 5:00 to "unstoppable things")
+- The beam now burns enemy projectiles (`projectileBurnTime`), the narrow-beam threshold for shields dropped 0.72 → 0.65, deflected beams throw blue sparks, and each enemy type shows a one-line tip the first time it appears (the ship tip also pulses the focus meter). Late-game threat/HP raised to keep the bot targets.
 
 ## Next up
 - Measure `?bench=5000` on a real mid-range laptop with a GPU and record it here.
