@@ -136,11 +136,12 @@ export function respawnBench(w: World): void {
   spawnEnemy(w, type, Math.cos(a) * R, Math.sin(a) * R, 0);
 }
 
-export function hurtPlayer(w: World, amount: number, continuous = false): void {
+export function hurtPlayer(w: World, amount: number, src: number, continuous = false): void {
   if (w.bench || w.state !== RunState.Running) return;
   const dmg = amount * (1 - w.stats.armour);
   w.hp -= dmg;
   w.damageTaken += dmg;
+  w.damageTakenBy[src]! += dmg;
   if (!continuous || w.hurtT <= 0) {
     w.events.push(Ev.Hurt, 0, 0, dmg);
     w.hurtT = 0.3;
@@ -310,7 +311,7 @@ export function updateEnemies(w: World, dt: number): void {
         const nd = Math.sqrt(nd2) || 1;
         E.x[i] = (nxp / nd) * reach;
         E.y[i] = (nyp / nd) * reach;
-        hurtPlayer(w, BOSSES[E.gen[i]!]!.contactDps * dt, true);
+        hurtPlayer(w, BOSSES[E.gen[i]!]!.contactDps * dt, EnemyType.Boss, true);
       } else if (w.bench) {
         // benchmark: recycle to the outer ring instead of hurting
         const a = E.phase[i]! + E.age[i]!;
@@ -318,7 +319,7 @@ export function updateEnemies(w: World, dt: number): void {
         E.y[i] = E.py[i] = Math.sin(a) * 1000;
         E.flags[i]! &= ~EF_BURROWED;
       } else {
-        hurtPlayer(w, ENEMIES[type]!.contactDamage);
+        hurtPlayer(w, ENEMIES[type]!.contactDamage, type);
         E.flags[i]! |= EF_NOXP;
         killEnemy(w, i, false);
       }

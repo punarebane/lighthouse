@@ -55,9 +55,9 @@ export interface BossDef {
 }
 
 export const BOSSES: BossDef[] = [
-  { name: 'The Leviathan', at: 300, hp: 3800, speed: 22, radius: 52, contactDps: 25, xp: 80, coins: 40 },
+  { name: 'The Leviathan', at: 300, hp: 2600, speed: 16, radius: 52, contactDps: 14, xp: 80, coins: 40 },
   { name: 'The Kraken', at: 600, hp: 11000, speed: 18, radius: 60, contactDps: 35, xp: 160, coins: 80 },
-  { name: 'The Drowned Maw', at: 900, hp: 26000, speed: 14, radius: 70, contactDps: 50, xp: 0, coins: 150 },
+  { name: 'The Drowned Maw', at: 900, hp: 20000, speed: 14, radius: 70, contactDps: 40, xp: 0, coins: 150 },
 ];
 
 export const CONFIG = {
@@ -132,16 +132,16 @@ export const CONFIG = {
     healFraction: 0.3,
   },
   director: {
-    /** [seconds, threat points per second] */
+    /** [seconds, threat points per second]; drops to 0 at 15:00 so dawn is a duel with the Maw */
     threatCurve: [
-      [0, 1.4], [60, 2.6], [180, 5.2], [300, 8.5], [420, 11.5], [600, 16], [780, 22], [900, 26],
+      [0, 1.6], [60, 3.4], [180, 7.5], [300, 11], [420, 16], [600, 23], [780, 35], [899, 44], [900, 0],
     ] as Array<[number, number]>,
     /** budget multiplier while a boss is alive */
     bossBudgetScale: 0.45,
     /** budget the director starts with, so the first group shows up immediately */
     startBudget: 6,
     /** hp multiplier ramps over time: [seconds, mult] */
-    hpCurve: [[0, 1], [300, 1.35], [600, 2.0], [900, 2.9]] as Array<[number, number]>,
+    hpCurve: [[0, 1], [300, 1.6], [600, 2.7], [780, 3.7], [900, 4.8]] as Array<[number, number]>,
     maxEnemies: 900,
     events: [
       { at: 125, kind: 'ring', type: EnemyType.Swarmer, count: 36 },
@@ -176,8 +176,8 @@ export const CONFIG = {
   },
   boss: {
     leviathanChargeCd: 7,
-    leviathanChargeSpeed: 120,
-    leviathanChargeTime: 1.4,
+    leviathanChargeSpeed: 80,
+    leviathanChargeTime: 1.2,
     krakenOrbitRadius: 400,
     krakenSummonCd: 5,
     krakenSummonCount: 6,

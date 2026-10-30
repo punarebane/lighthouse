@@ -15,9 +15,9 @@ const cost = (base: number) => (r: number) => Math.round(base * (1 + (r - 1) * 0
 
 export const META: MetaDef[] = [
   { id: 'm_hp', name: 'Stone Foundation', maxRank: 5, cost: cost(30),
-    desc: (r) => `+${r * 12} max HP`, apply: (s, r) => { s.hpMax += r * 12; } },
+    desc: (r) => `+${r * 10} max HP`, apply: (s, r) => { s.hpMax += r * 10; } },
   { id: 'm_dmg', name: 'Polished Mirror', maxRank: 5, cost: cost(40),
-    desc: (r) => `+${r * 7}% beam damage`, apply: (s, r) => { s.beamDpsMult += r * 0.07; } },
+    desc: (r) => `+${r * 5}% beam damage`, apply: (s, r) => { s.beamDpsMult += r * 0.05; } },
   { id: 'm_xp', name: "Keeper's Logbook", maxRank: 5, cost: cost(35),
     desc: (r) => `+${r * 6}% ember value`, apply: (s, r) => { s.xpMult += r * 0.06; } },
   { id: 'm_rot', name: 'Greased Bearings', maxRank: 5, cost: cost(20),

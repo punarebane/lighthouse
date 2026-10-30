@@ -104,6 +104,8 @@ export class World {
   readonly killsByType = new Int32Array(ENEMY_TYPE_COUNT);
   readonly damageBySource = new Float64Array(DmgSrc.Count);
   damageTaken = 0;
+  /** damage taken by source: enemy type 0..7, 8 = projectiles */
+  readonly damageTakenBy = new Float64Array(9);
   embersCollected = 0;
   bossesKilled = 0;
   peakEnemies = 0;

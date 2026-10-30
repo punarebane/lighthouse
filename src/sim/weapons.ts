@@ -200,7 +200,7 @@ export function updateProjectiles(w: World, dt: number): void {
     if (P.hostile[i]) {
       const reach = rr + P.radius[i]!;
       if (x * x + y * y <= reach * reach) {
-        hurtPlayer(w, P.damage[i]!);
+        hurtPlayer(w, P.damage[i]!, 8);
         P.pool.free(i);
       }
       continue;
