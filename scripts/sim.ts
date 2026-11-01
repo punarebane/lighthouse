@@ -9,7 +9,7 @@ import { cpus } from 'node:os';
 import { writeFileSync } from 'node:fs';
 import { createWorld, step } from '../src/sim/sim';
 import { makeInput, rollOffers, applyOffer, RunState } from '../src/sim/world';
-import { botInput, botPick } from '../src/sim/bot';
+import { botInput, botPick, setBotPriority } from '../src/sim/bot';
 import { META_FULL, META_NONE } from '../src/data/meta';
 import { UPGRADES, EVOLUTIONS } from '../src/data/upgrades';
 import { CONFIG, ENEMIES } from '../src/data/config';
@@ -47,6 +47,7 @@ function runOne(seed: number, full: boolean): RunResult {
 
 if (!isMainThread) {
   const { seeds, full } = workerData as { seeds: number[]; full: boolean };
+  if (process.env.BOT_PRIORITY) setBotPriority(process.env.BOT_PRIORITY.split(','));
   const out = seeds.map((s) => runOne(s, full));
   parentPort!.postMessage(out);
 } else {

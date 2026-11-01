@@ -11,10 +11,17 @@ export const BOT_PRIORITY: string[] = [
   'intensity', 'harpoon', 'second', 'range', 'width', 'burn', 'chain', 'drones', 'third',
   'lens', 'flash', 'foghorn', 'armour', 'hp', 'regen', 'rotation', 'glow', 'oil', 'magnet', 'frost',
 ];
-const PRIORITY_RANK = UPGRADES.map((u) => {
-  const r = BOT_PRIORITY.indexOf(u.id);
-  return r < 0 ? 99 : r;
-});
+let PRIORITY_RANK = rankFor(BOT_PRIORITY);
+function rankFor(list: string[]): number[] {
+  return UPGRADES.map((u) => {
+    const r = list.indexOf(u.id);
+    return r < 0 ? 99 : r;
+  });
+}
+/** Swap the bot's upgrade priority list (balance experiments). */
+export function setBotPriority(list: string[]): void {
+  PRIORITY_RANK = rankFor(list);
+}
 
 const BINS = 72;
 const hist = new Float32Array(BINS);
